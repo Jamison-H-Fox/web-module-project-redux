@@ -15,14 +15,17 @@ const AddMovieForm = (props) => {
         description:""
     });
 
-    const handleChange = (e) => {
+    const handleChange = (evt) => {
         setMovie({
             ...movie,
-            [e.target.name]: e.target.value
+            [evt.target.name]: evt.target.value
         });
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        props.addMovie(movie);
+        push('/movies');
     }
 
     const { title, director, genre, metascore, description } = movie;
@@ -67,4 +70,4 @@ const AddMovieForm = (props) => {
     </div>);
 }
 
-export default AddMovieForm;
+export default connect(null, { addMovie })(AddMovieForm);
